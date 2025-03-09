@@ -1,0 +1,79 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .message h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .message p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  .image .welcome-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .action-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .admin-link {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .admin-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .admin-link a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 600px) {
+    .message h1 {
+      font-size: 2rem;
+    }
+  
+    .message p {
+      font-size: 1rem;
+    }
+  
+    .action-button {
+      font-size: 1rem;
+    }
+  }
+  
