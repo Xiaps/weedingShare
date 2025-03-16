@@ -1,0 +1,16 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a href="#">MyApp</a>
+    </div>
+    <div class="navbar-menu" [class.is-active]="isActive">
+        <a routerLink="">Home</a>
+        <a routerLink="diaporama">Diapo</a>
+        <a routerLink="publish">Publier</a>
+        <a routerLink="admin">Admin</a>
+    </div>
+    <button class="navbar-burger" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
