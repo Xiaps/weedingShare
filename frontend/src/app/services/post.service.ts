@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
+import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://localhost:8080/api/posts';
+  private postEndpoint = '/posts';
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +19,14 @@ export class PostService {
       formData.append('comment', comment);
     }
 
-    return this.http.post(`${this.apiUrl}/add`, formData);
+    return this.http.post(`${environment.apiUrl + this.postEndpoint}`, formData);
+  }
+
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(environment.apiUrl + this.postEndpoint);
+  }
+
+  deletePost(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl + this.postEndpoint}/${id}`);
   }
 }

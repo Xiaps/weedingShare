@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -27,6 +28,23 @@ public class PostService {
         posts.add(newPost);
         writePostsToFile(posts);
         return newPost;
+    }
+
+    // Méthode pour supprimer un post en fonction de son ID
+    public boolean deletePost(String postId) {
+        List<Post> posts = readPostsFromFile();
+        // Filtrer les posts pour exclure celui avec l'ID spécifié
+        List<Post> updatedPosts = posts.stream()
+                .filter(post -> !post.getId().equals(postId))
+                .collect(Collectors.toList());
+
+        // Si la taille de la liste a changé, cela signifie qu'un post a été supprimé
+        if (updatedPosts.size() < posts.size()) {
+            writePostsToFile(updatedPosts); // Sauvegarder la nouvelle liste dans le fichier
+            return true; // Suppression réussie
+        }
+
+        return false; // Aucun post trouvé avec cet ID
     }
 
     private List<Post> readPostsFromFile() {
