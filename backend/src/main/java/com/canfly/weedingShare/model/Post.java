@@ -1,5 +1,7 @@
 package com.canfly.weedingShare.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class Post {
@@ -7,6 +9,7 @@ public class Post {
     private String id;
     private String imageUrl;
     private String comment;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private final LocalDateTime createdAt;
 
     public Post() {
