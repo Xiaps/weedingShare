@@ -1,30 +1,25 @@
 <div class="publish-container">
-    <!-- Titre et photo de la page d'accueil -->
-    <div class="header">
-      <img src="assets/home-photo.jpg" alt="Photo d'accueil" class="header-image" />
-      <h1 class="welcome-text">Bienvenue, publiez votre message !</h1>
-    </div>
-  
-    <!-- Sélectionner une photo -->
-    <div class="upload-section">
-      <input type="file" accept="image/*" (change)="onImageSelect($event)" class="file-input" />
-      @if(selectedImage){
-        <div class="image-preview">
-        <img [src]="selectedImage" alt="Preview" class="image-preview-img" />
-        <button (click)="onDeleteImage()" class="delete-button">Supprimer l'image</button>
+  <h2>Partagez un moment !</h2>
+
+  <!-- Zone d'upload de l'image -->
+  <div class="image-upload">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden id="fileInput">
+    <label for="fileInput" class="upload-btn">Sélectionner une image</label>
+
+    <!-- Aperçu de l'image -->
+    @if(previewUrl)
+    {
+      <div class="preview">
+        <img [src]="previewUrl" alt="Aperçu">
+        <button class="remove-btn" (click)="removeImage()">❌</button>
       </div>
-      }
-    
-    </div>
-  
-    <!-- Ajouter un commentaire -->
-    <div class="comment-section">
-      <textarea [(ngModel)]="comment" placeholder="Ajoutez un commentaire..." class="comment-input"></textarea>
-    </div>
-  
-    <!-- Bouton publier -->
-    <div class="publish-button-section">
-      <button (click)="onPublish()" class="publish-button">Publier le post</button>
-    </div>
+    }
+
   </div>
-  
+
+  <!-- Zone de commentaire -->
+  <textarea [(ngModel)]="comment" placeholder="Ajoutez un commentaire..."></textarea>
+
+  <!-- Bouton de soumission -->
+  <button (click)="submitPost()" [disabled]="!selectedImage">Publier</button>
+</div>

@@ -1,4 +1,6 @@
+
 import { Component } from '@angular/core';
+import { PostService } from '../../services/post.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,29 +10,49 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule]
 })
 export class PublishComponent {
-  public selectedImage: string | ArrayBuffer | null = null;
-  public comment: string = '';
+  selectedImage: File | null = null;
+  previewUrl: string | null = null;
+  comment: string = '';
 
-  // Fonction pour gérer la sélection d'une image
-  onImageSelect(event: any) {
-    const file = event.target.files[0];
-    if (file) {
+  constructor(private postService: PostService) {}
+
+  onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedImage = fileInput.files[0];
+
+      // Afficher un aperçu de l'image
       const reader = new FileReader();
       reader.onload = () => {
-        this.selectedImage = reader.result;
+        this.previewUrl = reader.result as string;
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.selectedImage);
     }
   }
 
-  // Fonction pour supprimer l'image sélectionnée
-  onDeleteImage() {
+  removeImage(): void {
     this.selectedImage = null;
+    this.previewUrl = null;
   }
 
-  // Fonction pour publier le post
-  onPublish() {
-    console.log('Post published with comment:', this.comment);
-    // Ici, tu peux ajouter la logique pour envoyer le post à ton serveur
+  submitPost(): void {
+    if (!this.selectedImage) {
+      alert('Veuillez sélectionner une image.');
+      return;
+    }
+
+    this.postService.addPost(this.selectedImage, this.comment).subscribe({
+      next: response => {
+        console.log('Post ajouté avec succès', response);
+        alert('Post ajouté avec succès !');
+        this.selectedImage = null;
+        this.previewUrl = null;
+        this.comment = '';
+      },
+      error: error => {
+        console.error('Erreur lors de l\'ajout du post', error);
+        alert('Erreur lors de l\'ajout du post');
+      }
+    });
   }
 }
