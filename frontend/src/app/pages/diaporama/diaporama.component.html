@@ -1,1 +1,10 @@
-<p>diaporama works!</p>
+<div class="diaporama-container">
+    <img [src]="'http://localhost:8080/' + currentPost?.imageUrl" alt="Post Image"
+         [class.fade-out]="fadeOut"
+         (load)="onImageLoad()"
+         class="diaporama-image"/>
+    <div class="comment-box">
+        <p *ngIf="currentPost">{{ currentPost.comment }}</p>
+        <p *ngIf="currentPost" class="date">{{ currentPost?.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+</div>
