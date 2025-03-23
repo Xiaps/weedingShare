@@ -25,6 +25,8 @@ backend/local.properties
 backend/.settings/
 backend/.classpath
 backend/.project
+uploads/
+backend/src/main/resources/static/
 
 # Frontend (Angular)
 frontend/node_modules/

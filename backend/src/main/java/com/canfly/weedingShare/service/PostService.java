@@ -4,10 +4,13 @@ import com.canfly.weedingShare.model.Post;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.nio.file.Files;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +20,21 @@ import java.util.stream.Collectors;
 public class PostService {
     private static final String FILE_PATH = "database/posts.json";
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
+    public PostService() {
+
+        Path databaseDir = Paths.get("database");
+
+        // Crée le dossier "Database" s'il n'existe pas
+        if (!Files.exists(databaseDir)) {
+            try {
+                Files.createDirectories(databaseDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Impossible de créer le dossier Database");
+            }
+        }
+    }
 
     public List<Post> getAllPosts() {
         return readPostsFromFile();
