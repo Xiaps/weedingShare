@@ -3,15 +3,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #048090;
-    padding: 1rem 2rem;
-    color: white;
+    background-color: var(--primary);
+    padding: 1rem 1.5rem;
+    color: var(--on-primary);
     position: relative;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
   }
   
   .navbar-brand a {
-    color: #E4FDE1;
+    color: var(--on-primary);
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
@@ -23,7 +23,7 @@
   }
   
   .navbar-menu a {
-    color: white;
+    color: var(--on-primary);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 5px; /* Rounded corners */
@@ -31,14 +31,14 @@
   }
   
   .navbar-menu a:hover {
-    background-color: #555; /* Darker background on hover */
-    color: #fff; /* Ensure text remains white on hover */
+    background-color: var(--surface); /* Darker background on hover */
+    color: var(--on-surface); /* Ensure text remains white on hover */
   }
   
   /* Burger menu styles */
   .navbar-burger {
     display: none;
-    background-color: #E4FDE1;
+    background-color: var(--surface);
     border-radius: 5px;
     border: 0;
     flex-direction: column;
@@ -46,7 +46,7 @@
   }
   
   .navbar-burger span {
-    background-color: #048090;
+    background-color: var(--on-surface);
     height: 2px;
     margin: 4px 0;
     width: 25px;
@@ -54,7 +54,7 @@
   }
   
   .navbar-burger:hover span {
-    background-color: #555; /* Darker color on hover */
+    background-color: var(--on-surface); /* Darker color on hover */
   }
   
   /* Media Query for Small Screens */
@@ -66,7 +66,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background-color: #333;
+      background-color: var(--surface);
       width: 100%;
       padding: 1rem 0;
       z-index: 1;

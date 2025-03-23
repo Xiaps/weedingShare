@@ -3,23 +3,25 @@
 
   <!-- Zone d'upload de l'image -->
   <div class="image-upload">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden id="fileInput">
-    <label for="fileInput" class="upload-btn">Sélectionner une image</label>
-
+  
     <!-- Aperçu de l'image -->
     @if(previewUrl)
     {
       <div class="preview">
         <img [src]="previewUrl" alt="Aperçu">
-        <button class="remove-btn" (click)="removeImage()">❌</button>
       </div>
+      <button class="delete-btn" (click)="removeImage()">Changer d'image</button>
+    }
+    @else{
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden id="fileInput">
+      <label for="fileInput" class="upload-btn">Ajouter une image</label>
     }
 
   </div>
 
   <!-- Zone de commentaire -->
-  <textarea [(ngModel)]="comment" placeholder="Ajoutez un commentaire..."></textarea>
+  <textarea [(ngModel)]="comment" placeholder="Ajoutez un commentaire (si vous le souhaitez)..."></textarea>
 
   <!-- Bouton de soumission -->
-  <button (click)="submitPost()" [disabled]="!selectedImage">Publier</button>
+  <button class="publish-btn" (click)="submitPost()" [disabled]="!selectedImage">Envoyer !</button>
 </div>

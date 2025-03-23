@@ -3,7 +3,7 @@
          [class.fade-out]="fadeOut"
          (load)="onImageLoad()"
          class="diaporama-image"/>
-    <div class="comment-box">
+    <div class="comment-box" [class.fade-out]="fadeOut">
         <p *ngIf="currentPost">{{ currentPost.comment }}</p>
         <p *ngIf="currentPost" class="date">{{ currentPost?.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>
