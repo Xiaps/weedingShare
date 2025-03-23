@@ -1,15 +1,12 @@
-<div class="admin-container">
-    <h2>Gestion des posts</h2>
+<div class="posts-container">
     <div class="post-list">
       <div *ngFor="let post of posts" class="post-card">
         <img [src]="environment.serverUrl + '/' + post.imageUrl" alt="Post image">
         @if(post.comment)
         {
-          <p>{{ post.comment }}</p>
+          <div>{{ post.comment }}</div>
         }
-        <p>{{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
-        <button (click)="deletePost(post.id)">🗑 Supprimer</button>
+        <div>{{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</div>
       </div>
     </div>
 </div>
-  
