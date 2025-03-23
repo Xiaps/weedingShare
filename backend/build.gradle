@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.canfly'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	toolchain {
@@ -17,6 +17,21 @@ repositories {
 	mavenCentral()
 }
 
+tasks.register('buildAngular', Exec) {
+	description = "Build Angular frontend"
+	workingDir '../frontend'
+	commandLine '/Users/mbelouin/.nvm/versions/node/v22.14.0/bin/npm', 'run', 'build' // Ou 'ng build --configuration production'
+}
+
+tasks.register('copyFrontend', Copy) {
+	description = "Copy frontend build to Spring Boot static folder"
+	dependsOn 'buildAngular'
+	from '../frontend/dist/frontend/browser' // Adapter selon le nom de ton projet Angular
+	into 'src/main/resources/static'
+}
+
+processResources.dependsOn copyFrontend
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
@@ -27,4 +42,14 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	delete 'src/main/resources/static'
+	dependsOn copyFrontend
+	archiveFileName = 'weedingShare.jar'
 }

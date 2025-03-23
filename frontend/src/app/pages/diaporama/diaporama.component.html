@@ -1,5 +1,5 @@
 <div class="diaporama-container">
-    <img [src]="'http://localhost:8080/' + currentPost?.imageUrl" alt="Post Image"
+    <img [src]="environment.serverUrl + '/' + currentPost?.imageUrl" alt="Post Image"
          [class.fade-out]="fadeOut"
          (load)="onImageLoad()"
          class="diaporama-image"/>

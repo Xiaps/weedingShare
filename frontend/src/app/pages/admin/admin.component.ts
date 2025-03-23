@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,7 @@ export class AdminComponent {
   posts: Post[] = [];
   loading = true;
   errorMessage = '';
+  environment = environment
 
   constructor(private postService: PostService) {}
 

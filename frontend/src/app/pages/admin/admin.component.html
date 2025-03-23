@@ -2,7 +2,7 @@
     <h2>Gestion des posts</h2>
     <div class="post-list">
       <div *ngFor="let post of posts" class="post-card">
-        <img [src]="'http://localhost:8080/' + post.imageUrl" alt="Post image">
+        <img [src]="environment.serverUrl + '/' + post.imageUrl" alt="Post image">
         <p><strong>Commentaire :</strong> {{ post.comment }}</p>
         <p><strong>Date :</strong> {{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
         <button (click)="deletePost(post.id)">🗑 Supprimer</button>
