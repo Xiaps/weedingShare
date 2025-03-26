@@ -26,6 +26,7 @@ backend/.settings/
 backend/.classpath
 backend/.project
 uploads/
+database/
 backend/src/main/resources/static/
 
 # Frontend (Angular)

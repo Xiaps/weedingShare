@@ -41,11 +41,24 @@ public class GeneralController {
                 uploadDir.mkdirs();
             }
 
-            // Enregistrer l'image sur le disque
-            String imagePath = IMAGE_UPLOAD_DIR + image.getOriginalFilename();
-            File destinationFile = new File(imagePath);
-            image.transferTo(Paths.get(imagePath));
+            // Obtenir le nom du fichier sans extension et son extension
+            String originalFilename = image.getOriginalFilename();
+            String baseName = originalFilename.substring(0, originalFilename.lastIndexOf('.'));
+            String extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
 
+            // Construire le chemin de l'image avec vérification d'existence
+            String imagePath = IMAGE_UPLOAD_DIR + originalFilename;
+            File destinationFile = new File(imagePath);
+            int counter = 1;
+
+            while (destinationFile.exists()) {
+                String newFileName = baseName + "(" + counter + ")" + extension;
+                imagePath = IMAGE_UPLOAD_DIR + newFileName;
+                destinationFile = new File(imagePath);
+                counter++;
+            }
+
+            image.transferTo(Paths.get(imagePath));
             // Ajouter le post dans la "base de données" JSON
             Post newPost = postService.addPost(imagePath, comment);
             return ResponseEntity.ok(newPost);
