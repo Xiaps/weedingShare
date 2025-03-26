@@ -1,10 +1,16 @@
 <div class="diaporama-container">
-    <img [src]="environment.serverUrl + '/' + currentPost?.imageUrl" alt="Post Image"
-         [class.fade-out]="fadeOut"
-         (load)="onImageLoad()"
-         class="diaporama-image"/>
-    <div class="comment-box" [class.fade-out]="fadeOut">
-        <p *ngIf="currentPost">{{ currentPost.comment }}</p>
-        <p *ngIf="currentPost" class="date">{{ currentPost?.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
-    </div>
+    @if(currentPost)
+    {
+        <img [src]="environment.serverUrl + '/' + currentPost?.imageUrl" alt="Post Image"
+            [class.fade-out]="fadeOut"
+            (load)="onImageLoad()"
+            class="diaporama-image"/>
+        <div *ngIf="currentPost.comment" class="comment-box" [class.fade-out]="fadeOut">
+            <p>{{ currentPost.comment }}</p>
+        </div>
+    }
+    @else
+    {
+        <p style="font-size: 3em; transition: all ease-out 1s;">Le diaporama va démarrer ...</p>
+    }
 </div>

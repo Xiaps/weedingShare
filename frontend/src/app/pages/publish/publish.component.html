@@ -7,9 +7,7 @@
     <!-- Aperçu de l'image -->
     @if(previewUrl)
     {
-      <div class="preview">
-        <img [src]="previewUrl" alt="Aperçu">
-      </div>
+      <img [src]="previewUrl" alt="Aperçu">
       <button class="delete-btn" (click)="removeImage()">Changer d'image</button>
     }
     @else{
